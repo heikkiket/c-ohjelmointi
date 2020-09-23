@@ -1,7 +1,6 @@
 #ifndef MATKALIPPU_H
 #define MATKALIPPU_H
 
-
 class Matkalippu
 {
  private:
@@ -9,7 +8,6 @@ class Matkalippu
  public:
   Matkalippu(float hinta);
   float getHinta();
-  enum tyyppi { sisainen, seutu };
 };
 
 #endif
