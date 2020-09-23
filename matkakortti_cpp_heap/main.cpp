@@ -10,9 +10,6 @@ int main()
   bool jatketaan = true;
   int valinta = 0;
   Matkakortti *valittuKortti;
-  Matkakortti kortti1 ("Herrko", "Herranen");
-  kortti1.lataaSaldoa(4.5);
-  kortti1.tulostaKortinTiedot();
 
   while(jatketaan) {
     cout << "\n\n1. Luo matkakortti\n";
