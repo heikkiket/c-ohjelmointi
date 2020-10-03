@@ -15,6 +15,7 @@ public:
   Leimaaja();
   Leimaaja(int linja);
   ~Leimaaja();
-  void leimaa(Matkakortti* kortti, Matkalippu lippu);
+  void leimaa(std::shared_ptr<Matkakortti> kortti, Matkalippu lippu);
+
   void tulostaLeimaustapahtumat();
 };

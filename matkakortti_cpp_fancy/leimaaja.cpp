@@ -10,7 +10,7 @@ Leimaaja::Leimaaja(int linja) {
 
 Leimaaja::~Leimaaja() {}
 
-void Leimaaja::leimaa(Matkakortti *kortti, Matkalippu lippu)
+void Leimaaja::leimaa(std::shared_ptr<Matkakortti> kortti, Matkalippu lippu)
 {
   if(kortti->matkusta(lippu)) {
     std::cout << "Matka Leimaajalla tehty\n";

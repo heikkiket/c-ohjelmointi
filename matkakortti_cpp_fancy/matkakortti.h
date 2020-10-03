@@ -2,6 +2,7 @@
 #define MATKAKORTTI_H
 
 #include <string>
+#include <memory>
 
 #include "matkalippu.h"
 
@@ -9,10 +10,10 @@ class Matkakortti
 {
 
 private:
-  std::string etunimi;
-  std::string sukunimi;
-  float saldo;
-  std::string virhe;
+  std::shared_ptr<std::string> etunimi;
+  std::shared_ptr<std::string> sukunimi;
+  std::shared_ptr<float> saldo;
+  std::shared_ptr<std::string> virhe;
   bool veloitaLippu(Matkalippu lippu);
 
 public:

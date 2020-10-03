@@ -10,7 +10,7 @@ int main()
 {
   bool jatketaan = true;
   int valinta = 0;
-  Matkakortti *valittuKortti;
+  std::shared_ptr<Matkakortti> valittuKortti;
 
   int linja;
   cout << "Anna linjan nimi, jolla leimaaja leimaa: ";
@@ -35,7 +35,7 @@ int main()
            << "Anna nimi (etunimi ja sukunimi): ";
       std::string etunimi, sukunimi;
       cin >> etunimi >> sukunimi;
-      valittuKortti = new Matkakortti(etunimi, sukunimi);
+      valittuKortti = std::unique_ptr<Matkakortti>(new Matkakortti(etunimi, sukunimi));
       break;
     }
 

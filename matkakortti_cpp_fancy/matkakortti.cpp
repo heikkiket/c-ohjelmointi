@@ -5,26 +5,28 @@
 Matkakortti::Matkakortti(std::string etunimi, std::string sukunimi)
 {
   this->vaihdaNimi(etunimi, sukunimi);
-  this->saldo = 0;
+  saldo = std::unique_ptr<float>(new float(0));
 }
 
-Matkakortti::~Matkakortti() {}
+Matkakortti::~Matkakortti() {
+  std::cout << "Matkakortin destruktori suoritettu!\n";
+}
 
 void Matkakortti::vaihdaNimi(std::string aetunimi, std::string asukunimi)
 {
-  etunimi = aetunimi;
-  sukunimi = asukunimi;
+  etunimi = std::unique_ptr<std::string>(new std::string(aetunimi));
+  sukunimi = std::unique_ptr<std::string>(new std::string(asukunimi));
 }
 
 void Matkakortti::tulostaKortinTiedot()
 {
   std::cout << "---- Matkakortin tiedot ----\n";
-  std::cout << "Omistaja: " << etunimi << " " << sukunimi << "\nSaldo: " << saldo << "\n";
+  std::cout << "Omistaja: " << *etunimi << " " << *sukunimi << "\nSaldo: " << *saldo << "\n";
 }
 
-void Matkakortti::lataaSaldoa(float saldo)
+void Matkakortti::lataaSaldoa(float asaldo)
 {
-  this->saldo += saldo;
+  *saldo = *saldo + asaldo;
 }
 
 bool Matkakortti::matkusta(Matkalippu lippu)
@@ -32,7 +34,7 @@ bool Matkakortti::matkusta(Matkalippu lippu)
   if(this->veloitaLippu(lippu)) {
     return true;
   } else {
-    this-> virhe = "Matkustaminen epäonnistui: saldoa ei ole riittävästi.\n";
+    *virhe = "Matkustaminen epäonnistui: saldoa ei ole riittävästi.\n";
     return false;
   }
 
@@ -40,20 +42,20 @@ bool Matkakortti::matkusta(Matkalippu lippu)
 
 std::string Matkakortti::getEtunimi()
 {
-  return etunimi;
+  return *etunimi;
 }
 
 std::string Matkakortti::getSukunimi()
 {
-  return sukunimi;
+  return *sukunimi;
 }
 
 bool Matkakortti::veloitaLippu(Matkalippu lippu) {
 
-  if (this->saldo - lippu.getHinta() < 0) {
+  if (*saldo - lippu.getHinta() < 0) {
     return false;
   }
 
-  this->saldo -= lippu.getHinta();
+  *saldo -= lippu.getHinta();
   return true;
 }
