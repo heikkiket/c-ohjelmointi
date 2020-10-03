@@ -31,11 +31,10 @@ void Matkakortti::lataaSaldoa(float asaldo)
 
 bool Matkakortti::matkusta(Matkalippu lippu)
 {
-  std::cout << "Here";
   if(this->veloitaLippu(lippu)) {
     return true;
   } else {
-    *virhe = "Matkustaminen epäonnistui: saldoa ei ole riittävästi.\n";
+    virhe = std::make_shared<std::string> ("Matkustaminen epäonnistui: saldoa ei ole riittävästi.");
     return false;
   }
 
@@ -58,12 +57,10 @@ std::string Matkakortti::palautaVirhe()
 
 bool Matkakortti::veloitaLippu(Matkalippu lippu) {
 
-  std::cout << "Veloitan lipppua";
   if (*saldo - lippu.getHinta() < 0) {
     return false;
   }
 
   *saldo -= lippu.getHinta();
-  std::cout << "DONE";
   return true;
 }
