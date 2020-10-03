@@ -7,6 +7,7 @@ matkakortti.bin:
 	matkakortti_cpp_fancy/matkalippu.cpp \
 	matkakortti_cpp_fancy/leimaaja.cpp \
 	matkakortti_cpp_fancy/leimaustapahtuma.cpp \
+	matkakortti_cpp_fancy/paneeli.cpp \
 	-o $(binary)
 
 run:
