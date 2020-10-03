@@ -3,22 +3,35 @@
 Paneeli::Paneeli() {}
 Paneeli::~Paneeli() {}
 
-void Paneeli::naytaLeimauksenTiedot(std::unique_ptr<Leimaustapahtuma> &leimaus)
-{
-
-}
-
-void naytaVirheviesti(std::string viesti);
-
-void Paneeli::piirraPaneeli()
+void Paneeli::naytaLeimauksenTiedot(std::shared_ptr<Leimaustapahtuma> &leimaus)
 {
   this->piirraReunus();
   this->piirraOtsikko();
   this->tulostaRivi("");
-  this->tulostaRivi(this->tulostaVihrea("test"));
-  this->tulostaRivi("Tahan sisaltoa useammankin rivin verran");
+  this->tulostaRivi(this->tulostaVihrea("LEIMAUS SUORITETTU"));
+  this->tulostaRivi(this->tulostaVihrea(leimaus->getLippu()));
   this->tulostaRivi("");
-  this->tulostaRivi("@T: Heikki");
+  this->piirraReunus();
+}
+
+void Paneeli::naytaVirheviesti(std::string viesti)
+{
+  this->piirraReunus();
+  this->piirraOtsikko();
+  this->tulostaRivi("");
+  this->tulostaRivi(this->tulostaPunainen("MATKA EVÄTTY"));
+  this->tulostaRivi(viesti);
+  this->tulostaRivi("");
+  this->piirraReunus();
+}
+
+void Paneeli::piirraPaneeli(std::string sisalto)
+{
+  this->piirraReunus();
+  this->piirraOtsikko();
+  this->tulostaRivi("");
+  this->tulostaRivi(sisalto);
+  this->tulostaRivi("");
   this->piirraReunus();
 }
 

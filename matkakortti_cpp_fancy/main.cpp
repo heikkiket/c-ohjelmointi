@@ -67,7 +67,8 @@ int main() {
       leimaaja.tulostaLeimaustapahtumat();
       break;
 
-    case 0:         cout << "Näkemiin!\n";
+    case 0:
+      cout << "Näkemiin!\n";
       jatketaan = false;
       break;
 
@@ -95,9 +96,9 @@ void matkusta(std::unique_ptr<Matkakortti> &kortti)
       cin >> matkatyyppi;
       Matkalippu lippu(0);
       if(matkatyyppi == 1) {
-        lippu = Matkalippu(2.80);
+        lippu = Matkalippu("Sisäinen lippu", 2.80);
       } else if(matkatyyppi == 2) {
-        lippu = Matkalippu(4.50);
+        lippu = Matkalippu("Seutulippu", 4.50);
       }
       leimaaja.leimaa(kortti, lippu);
 }

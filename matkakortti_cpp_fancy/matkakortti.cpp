@@ -31,6 +31,7 @@ void Matkakortti::lataaSaldoa(float asaldo)
 
 bool Matkakortti::matkusta(Matkalippu lippu)
 {
+  std::cout << "Here";
   if(this->veloitaLippu(lippu)) {
     return true;
   } else {
@@ -50,12 +51,19 @@ std::string Matkakortti::getSukunimi()
   return *sukunimi;
 }
 
+std::string Matkakortti::palautaVirhe()
+{
+  return *virhe;
+}
+
 bool Matkakortti::veloitaLippu(Matkalippu lippu) {
 
+  std::cout << "Veloitan lipppua";
   if (*saldo - lippu.getHinta() < 0) {
     return false;
   }
 
   *saldo -= lippu.getHinta();
+  std::cout << "DONE";
   return true;
 }

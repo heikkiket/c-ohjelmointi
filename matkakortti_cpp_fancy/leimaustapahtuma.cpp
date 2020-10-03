@@ -1,6 +1,6 @@
 #include "leimaustapahtuma.h"
 
-Leimaustapahtuma::Leimaustapahtuma(std::string etunimi, std::string sukunimi)
+Leimaustapahtuma::Leimaustapahtuma(std::string etunimi, std::string sukunimi, Matkalippu *lippu)
 {
   this->etunimi = etunimi;
   this->sukunimi = sukunimi;
@@ -9,6 +9,9 @@ Leimaustapahtuma::Leimaustapahtuma(std::string etunimi, std::string sukunimi)
   time (&sekunnit);
 
   localtime_r(&sekunnit, &aikaleima);
+
+  this->lippu = std::make_shared<Matkalippu>(*lippu);
+
 }
 
 Leimaustapahtuma::~Leimaustapahtuma() {}
@@ -29,5 +32,10 @@ std::string Leimaustapahtuma::getAika()
 
 std::string Leimaustapahtuma::tulosta()
 {
-  return this->getNimi() + " " + this->getAika();
+  return getNimi() + " " + getAika() + " " + getLippu();
+}
+
+std::string Leimaustapahtuma::getLippu()
+{
+  return this->lippu->getNimi() + " " + std::to_string(this->lippu->getHinta());
 }

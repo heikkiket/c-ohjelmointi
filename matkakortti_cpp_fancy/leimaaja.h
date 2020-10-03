@@ -1,3 +1,6 @@
+#ifndef LEIMAAJA_H
+#define LEIMAAJA_H
+
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -5,12 +8,14 @@
 #include "matkakortti.h"
 #include "matkalippu.h"
 #include "leimaustapahtuma.h"
+#include "paneeli.h"
 
 class Leimaaja
 {
 private:
   std::vector<Leimaustapahtuma> leimaustapahtumat;
-  void kirjaaLeimaustapahtuma(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu);
+  std::shared_ptr<Leimaustapahtuma> kirjaaLeimaustapahtuma(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu);
+  Paneeli paneeli;
   int linja {-1};
 public:
   Leimaaja();
@@ -20,3 +25,5 @@ public:
 
   void tulostaLeimaustapahtumat();
 };
+
+#endif

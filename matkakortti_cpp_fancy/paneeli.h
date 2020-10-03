@@ -12,12 +12,11 @@ class Paneeli
 {
 public:
   Paneeli();
-  void naytaLeimauksenTiedot(std::unique_ptr<Leimaustapahtuma> &leimaus);
+  void naytaLeimauksenTiedot(std::shared_ptr<Leimaustapahtuma> &leimaus);
   void naytaVirheviesti(std::string viesti);
   ~Paneeli();
-  void piirraPaneeli();
-private:
-  int width = 40;
+  void piirraPaneeli(std::string sisalto);
+private : int width = 40;
   int hPadding = 1;
   void piirraReunus();
   void piirraOtsikko();

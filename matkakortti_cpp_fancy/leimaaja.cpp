@@ -4,6 +4,7 @@ Leimaaja::Leimaaja() {}
 
 Leimaaja::Leimaaja(int linja) {
   this->linja = linja;
+  this->paneeli = Paneeli();
 }
 
 Leimaaja::~Leimaaja() {}
@@ -11,10 +12,10 @@ Leimaaja::~Leimaaja() {}
 void Leimaaja::leimaa(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu)
 {
   if(kortti->matkusta(lippu)) {
-    std::cout << "Matka Leimaajalla tehty\n";
-    this->kirjaaLeimaustapahtuma(kortti, lippu);
+    std::shared_ptr<Leimaustapahtuma> leimaustapahtuma = this->kirjaaLeimaustapahtuma(kortti, lippu);
+    this->paneeli.naytaLeimauksenTiedot(leimaustapahtuma);
   } else {
-    std::cout << "Ei onnistunut\n";
+    this->paneeli.naytaVirheviesti(kortti->palautaVirhe());
   }
 
 }
@@ -44,8 +45,11 @@ void Leimaaja::tulostaLeimaustapahtumat()
   }
 }
 
-void Leimaaja::kirjaaLeimaustapahtuma(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu)
+std::shared_ptr<Leimaustapahtuma> Leimaaja::kirjaaLeimaustapahtuma(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu)
 {
-  Leimaustapahtuma tapahtuma = { kortti->getEtunimi(), kortti->getSukunimi()};
+  Leimaustapahtuma tapahtuma = { kortti->getEtunimi(), kortti->getSukunimi(), &lippu };
+
   leimaustapahtumat.push_back(tapahtuma);
+
+  return std::make_shared<Leimaustapahtuma>(tapahtuma);
 }
