@@ -53,3 +53,9 @@ std::shared_ptr<Leimaustapahtuma> Leimaaja::kirjaaLeimaustapahtuma(std::unique_p
 
   return std::make_shared<Leimaustapahtuma>(tapahtuma);
 }
+
+void Leimaaja::operator<<(std::unique_ptr<Matkakortti> &kortti)
+{
+  Matkalippu lippu ("Helsinki", 2.80);
+  return this->leimaa(kortti,lippu);
+}

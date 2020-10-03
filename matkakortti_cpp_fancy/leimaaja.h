@@ -22,8 +22,8 @@ public:
   Leimaaja(int linja);
   ~Leimaaja();
   void leimaa(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu);
-
   void tulostaLeimaustapahtumat();
+  void operator<<( std::unique_ptr<Matkakortti> &kortti);
 };
 
 #endif

@@ -29,6 +29,7 @@ int main() {
     cout << "4. Vaihda kortin haltijan nimi\n";
     cout << "5. Matkusta kortilla\n";
     cout << "6. Tulosta leimaustapahtumat\n";
+    cout << "7. Matkusta operaattoria kuormittamalla\n";
     cout << "0. Poistu\n\n";
     cout << "Anna valinta: ";
     cin >> valinta;
@@ -65,6 +66,10 @@ int main() {
 
     case 6:
       leimaaja.tulostaLeimaustapahtumat();
+      break;
+
+    case 7:
+      leimaaja << valittuKortti;
       break;
 
     case 0:
