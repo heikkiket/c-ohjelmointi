@@ -6,17 +6,21 @@ using namespace std;
 #include "matkakortti.h"
 #include "leimaaja.h"
 
-int main()
-{
+std::unique_ptr<Matkakortti> valittuKortti;
+Leimaaja leimaaja;
+
+std::unique_ptr<Matkakortti> luoMatkakortti();
+void matkusta(std::unique_ptr<Matkakortti> &kortti);
+
+int main() {
   bool jatketaan = true;
   int valinta = 0;
-  std::shared_ptr<Matkakortti> valittuKortti;
 
   int linja;
   cout << "Anna linjan nimi, jolla leimaaja leimaa: ";
   cin >> linja;
 
-  Leimaaja leimaaja (linja);
+  leimaaja = Leimaaja(linja);
 
   while(jatketaan) {
     cout << "\n\n1. Luo matkakortti\n";
@@ -30,14 +34,9 @@ int main()
     cin >> valinta;
     cout << "\n";
     switch(valinta) {
-    case 1: {
-      cout << "1. Luo matkakortti\n"
-           << "Anna nimi (etunimi ja sukunimi): ";
-      std::string etunimi, sukunimi;
-      cin >> etunimi >> sukunimi;
-      valittuKortti = std::unique_ptr<Matkakortti>(new Matkakortti(etunimi, sukunimi));
+    case 1:
+      valittuKortti = luoMatkakortti();
       break;
-    }
 
     case 2: {
       cout << "Paljonko ladataan?";
@@ -59,21 +58,10 @@ int main()
       break;
     }
 
-    case 5: {
-      cout << "Matkan tyyppi?\n"
-           << " 1. Sisäinen matka\n"
-           << " 2. Seutumatka\n";
-      int matkatyyppi{};
-      cin >> matkatyyppi;
-      Matkalippu lippu(0);
-      if(matkatyyppi == 1) {
-        lippu = Matkalippu(2.80);
-      } else if(matkatyyppi == 2) {
-        lippu = Matkalippu(4.50);
-      }
-      leimaaja.leimaa(valittuKortti, lippu);
+    case 5:
+      matkusta(valittuKortti);
       break;
-    }
+
 
     case 6:
       leimaaja.tulostaLeimaustapahtumat();
@@ -86,4 +74,30 @@ int main()
     }
   }
   return 0;
+}
+
+std::unique_ptr<Matkakortti> luoMatkakortti()
+{
+  cout << "1. Luo matkakortti\n"
+       << "Anna nimi (etunimi ja sukunimi): ";
+  std::string etunimi, sukunimi;
+  cin >> etunimi >> sukunimi;
+  std::unique_ptr<Matkakortti> kortti(new Matkakortti(etunimi, sukunimi));
+  return kortti;
+}
+
+void matkusta(std::unique_ptr<Matkakortti> &kortti)
+{
+       cout << "Matkan tyyppi?\n"
+           << " 1. Sisäinen matka\n"
+           << " 2. Seutumatka\n";
+      int matkatyyppi{};
+      cin >> matkatyyppi;
+      Matkalippu lippu(0);
+      if(matkatyyppi == 1) {
+        lippu = Matkalippu(2.80);
+      } else if(matkatyyppi == 2) {
+        lippu = Matkalippu(4.50);
+      }
+      leimaaja.leimaa(kortti, lippu);
 }

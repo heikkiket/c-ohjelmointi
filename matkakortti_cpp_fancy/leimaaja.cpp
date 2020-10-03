@@ -1,8 +1,6 @@
 #include "leimaaja.h"
 
-Leimaaja::Leimaaja()
-{
-}
+Leimaaja::Leimaaja() {}
 
 Leimaaja::Leimaaja(int linja) {
   this->linja = linja;
@@ -10,11 +8,11 @@ Leimaaja::Leimaaja(int linja) {
 
 Leimaaja::~Leimaaja() {}
 
-void Leimaaja::leimaa(std::shared_ptr<Matkakortti> kortti, Matkalippu lippu)
+void Leimaaja::leimaa(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu)
 {
   if(kortti->matkusta(lippu)) {
     std::cout << "Matka Leimaajalla tehty\n";
-    this->kirjaaLeimaustapahtuma(*kortti, lippu);
+    this->kirjaaLeimaustapahtuma(kortti, lippu);
   } else {
     std::cout << "Ei onnistunut\n";
   }
@@ -46,8 +44,8 @@ void Leimaaja::tulostaLeimaustapahtumat()
   }
 }
 
-void Leimaaja::kirjaaLeimaustapahtuma(Matkakortti kortti, Matkalippu lippu)
+void Leimaaja::kirjaaLeimaustapahtuma(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu)
 {
-  Leimaustapahtuma tapahtuma = { kortti.getEtunimi(), kortti.getSukunimi()};
+  Leimaustapahtuma tapahtuma = { kortti->getEtunimi(), kortti->getSukunimi()};
   leimaustapahtumat.push_back(tapahtuma);
 }

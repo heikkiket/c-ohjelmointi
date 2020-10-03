@@ -1,7 +1,7 @@
 binary = app.bin
 
 matkakortti.bin:
-	g++ -std=c++11 \
+	g++ \
 	matkakortti_cpp_fancy/main.cpp \
 	matkakortti_cpp_fancy/matkakortti.cpp \
 	matkakortti_cpp_fancy/matkalippu.cpp \
