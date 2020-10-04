@@ -6,8 +6,10 @@
 #include <iostream>
 
 #include "matkalippu.h"
+#include "henkilokortti.h"
+#include "lompakko.h"
 
-class Matkakortti
+class Matkakortti : public HenkiloKortti, public Lompakko
 {
 
 private:
@@ -22,7 +24,6 @@ public:
   ~Matkakortti();
   bool matkusta(Matkalippu lippu);
 
-  void vaihdaNimi(std::string aetunimi, std::string asukunimi);
   void lataaSaldoa(float saldo);
 
   std::string getEtunimi();

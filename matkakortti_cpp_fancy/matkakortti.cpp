@@ -1,10 +1,11 @@
 #include <iostream>
 
 #include "matkakortti.h"
+#include "omistaja.h"
 
-Matkakortti::Matkakortti(std::string etunimi, std::string sukunimi)
+Matkakortti::Matkakortti(std::string aetunimi, std::string asukunimi)
+  : Omistaja{ aetunimi, asukunimi }
 {
-  this->vaihdaNimi(etunimi, sukunimi);
   saldo = std::unique_ptr<float>(new float(0));
 }
 
@@ -12,11 +13,7 @@ Matkakortti::~Matkakortti() {
   std::cout << "Matkakortin destruktori suoritettu!\n";
 }
 
-void Matkakortti::vaihdaNimi(std::string aetunimi, std::string asukunimi)
-{
-  etunimi = std::unique_ptr<std::string>(new std::string(aetunimi));
-  sukunimi = std::unique_ptr<std::string>(new std::string(asukunimi));
-}
+
 
 
 void Matkakortti::lataaSaldoa(float asaldo)
@@ -63,7 +60,7 @@ bool Matkakortti::veloitaLippu(Matkalippu lippu) {
 std::ostream &operator<<(std::ostream &os, const Matkakortti &kortti)
 {
   os << "---- Matkakortin tiedot ----\n";
-  os << "Omistaja: " << *kortti.etunimi << " " << *kortti.sukunimi
+  os << "Omistaja: " << kortti.annaNimi()
             << "\nSaldo: " << *kortti.saldo << "\n";
   return os;
 }
