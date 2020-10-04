@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <iostream>
 
 #include "matkalippu.h"
 
@@ -20,12 +21,15 @@ public:
   Matkakortti(std::string aetunimi, std::string asukunimi);
   ~Matkakortti();
   bool matkusta(Matkalippu lippu);
+
   void vaihdaNimi(std::string aetunimi, std::string asukunimi);
   void lataaSaldoa(float saldo);
-  void tulostaKortinTiedot();
+
   std::string getEtunimi();
   std::string getSukunimi();
   std::string palautaVirhe();
+
+  friend std::ostream &operator<<(std::ostream &os, const Matkakortti &kortti);
 };
 
 #endif

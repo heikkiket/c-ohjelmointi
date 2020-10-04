@@ -18,11 +18,6 @@ void Matkakortti::vaihdaNimi(std::string aetunimi, std::string asukunimi)
   sukunimi = std::unique_ptr<std::string>(new std::string(asukunimi));
 }
 
-void Matkakortti::tulostaKortinTiedot()
-{
-  std::cout << "---- Matkakortin tiedot ----\n";
-  std::cout << "Omistaja: " << *etunimi << " " << *sukunimi << "\nSaldo: " << *saldo << "\n";
-}
 
 void Matkakortti::lataaSaldoa(float asaldo)
 {
@@ -63,4 +58,12 @@ bool Matkakortti::veloitaLippu(Matkalippu lippu) {
 
   *saldo -= lippu.getHinta();
   return true;
+}
+
+std::ostream &operator<<(std::ostream &os, const Matkakortti &kortti)
+{
+  os << "---- Matkakortin tiedot ----\n";
+  os << "Omistaja: " << *kortti.etunimi << " " << *kortti.sukunimi
+            << "\nSaldo: " << *kortti.saldo << "\n";
+  return os;
 }

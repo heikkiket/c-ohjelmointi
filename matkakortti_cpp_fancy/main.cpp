@@ -30,6 +30,7 @@ int main() {
     cout << "5. Matkusta kortilla\n";
     cout << "6. Tulosta leimaustapahtumat\n";
     cout << "7. Matkusta operaattoria kuormittamalla\n";
+    cout << "8. Tulosta leimaajan tiedot \n";
     cout << "0. Poistu\n\n";
     cout << "Anna valinta: ";
     cin >> valinta;
@@ -48,7 +49,7 @@ int main() {
     }
 
     case 3:
-      valittuKortti->tulostaKortinTiedot();
+      std::cout << *valittuKortti;
       break;
 
     case 4: {
@@ -70,6 +71,10 @@ int main() {
 
     case 7:
       leimaaja << valittuKortti;
+      break;
+
+    case 8:
+      std::cout << leimaaja;
       break;
 
     case 0:

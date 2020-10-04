@@ -59,3 +59,10 @@ void Leimaaja::operator<<(std::unique_ptr<Matkakortti> &kortti)
   Matkalippu lippu ("Helsinki", 2.80);
   return this->leimaa(kortti,lippu);
 }
+
+std::ostream &operator<<(std::ostream &os, const Leimaaja &leimaaja)
+{
+  os << "Linjan " << leimaaja.linja << " leimauspaneeli.\n";
+  os << "Leimaustapahtumia yhteensä " << leimaaja.leimaustapahtumat.size() << " kpl";
+  return os;
+}

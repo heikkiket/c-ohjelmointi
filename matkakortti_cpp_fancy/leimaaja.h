@@ -24,6 +24,7 @@ public:
   void leimaa(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu);
   void tulostaLeimaustapahtumat();
   void operator<<( std::unique_ptr<Matkakortti> &kortti);
+  friend std::ostream &operator<<(std::ostream &os, const Leimaaja &leimaaja);
 };
 
 #endif
