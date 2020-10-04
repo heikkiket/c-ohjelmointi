@@ -9,10 +9,12 @@ using namespace std;
 std::unique_ptr<Matkakortti> valittuKortti;
 Leimaaja leimaaja;
 
+/*  UI helper functions */
 std::unique_ptr<Matkakortti> luoMatkakortti();
 void matkusta(std::unique_ptr<Matkakortti> &kortti);
+void muutaListanKokoa();
 
-int main() {
+    int main() {
   bool jatketaan = true;
   int valinta = 0;
 
@@ -29,7 +31,7 @@ int main() {
     cout << "4. Vaihda kortin haltijan nimi\n";
     cout << "5. Matkusta kortilla\n";
     cout << "6. Tulosta leimaustapahtumat\n";
-    cout << "7. Matkusta operaattoria kuormittamalla\n";
+    cout << "7. Muuta leimauslistan kokoa\n";
     cout << "8. Tulosta leimaajan tiedot \n";
     cout << "0. Poistu\n\n";
     cout << "Anna valinta: ";
@@ -70,7 +72,7 @@ int main() {
       break;
 
     case 7:
-      leimaaja << valittuKortti;
+      muutaListanKokoa();
       break;
 
     case 8:
@@ -111,4 +113,15 @@ void matkusta(std::unique_ptr<Matkakortti> &kortti)
         lippu = Matkalippu("Seutulippu", 4.50);
       }
       leimaaja.leimaa(kortti, lippu);
+}
+
+void muutaListanKokoa()
+{
+  int lkm = 0;
+  cout << "7. Muuta listan kokoa\n"
+       << "-----------------------\n"
+       << "  Montako leimaustapahtumaa näytetään? ";
+  cin >> lkm;
+  leimaaja.muutaLeimaustenLukumaara(lkm);
+  cout << "Listan koko on jatkossa " << lkm << ".";
 }

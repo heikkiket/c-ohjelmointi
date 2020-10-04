@@ -22,12 +22,11 @@ void Leimaaja::leimaa(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu)
 
 void Leimaaja::tulostaLeimaustapahtumat()
 {
-  int lukumaara = 5;
 
   if (this->linja != -1) {
     std::cout << "Linjan " << this->linja << " ";
   }
-  std::cout << lukumaara << " viimeisintä leimaustapahtumaa:";
+  std::cout << this->lukumaara << " viimeisintä leimaustapahtumaa:";
   std::cout << "\n";
 
   int index = 0;
@@ -39,7 +38,7 @@ void Leimaaja::tulostaLeimaustapahtumat()
 
     index++;
 
-    if (index == lukumaara) {
+    if (index == this->lukumaara) {
       break;
     }
   }
@@ -52,6 +51,11 @@ std::shared_ptr<Leimaustapahtuma> Leimaaja::kirjaaLeimaustapahtuma(std::unique_p
   leimaustapahtumat.push_back(tapahtuma);
 
   return std::make_shared<Leimaustapahtuma>(tapahtuma);
+}
+
+void Leimaaja::muutaLeimaustenLukumaara(int lkm)
+{
+  this->lukumaara = lkm;
 }
 
 void Leimaaja::operator<<(std::unique_ptr<Matkakortti> &kortti)

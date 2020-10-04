@@ -17,12 +17,15 @@ private:
   std::shared_ptr<Leimaustapahtuma> kirjaaLeimaustapahtuma(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu);
   Paneeli paneeli;
   int linja {-1};
+  int lukumaara = 5;
+
 public:
   Leimaaja();
   Leimaaja(int linja);
   ~Leimaaja();
   void leimaa(std::unique_ptr<Matkakortti> &kortti, Matkalippu lippu);
   void tulostaLeimaustapahtumat();
+  void muutaLeimaustenLukumaara(int lkm);
   void operator<<( std::unique_ptr<Matkakortti> &kortti);
   friend std::ostream &operator<<(std::ostream &os, const Leimaaja &leimaaja);
 };
